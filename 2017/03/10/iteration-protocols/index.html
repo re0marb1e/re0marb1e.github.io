@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="岚山竹林 | re0marb1e&#39;s Bamboo Grove">
 <meta property="og:description" content="ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-23T12:05:05.664Z">
+<meta property="og:updated_time" content="2018-03-23T12:13:06.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迭代协议">
 <meta name="twitter:description" content="ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。">
@@ -328,7 +328,9 @@
 <p>除了for…of，ES6的扩展语法(Spread syntax)比如数组解构其原理也是使用了迭代器协议。<br>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const someString = &quot;Hello&quot;</span><br><span class="line">console.log([...someString])      // [ &apos;H&apos;, &apos;e&apos;, &apos;l&apos;, &apos;l&apos;, &apos;o&apos; ]</span><br></pre></td></tr></table></figure>
 <p>你会发现ES6的生成器对象也遵循迭代器协议，于是我们可以直接用生成器来定义迭代器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* genFunc() &#123;</span><br><span class="line">		yield 1;</span><br><span class="line">		yield 2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var obj = genFunc();</span><br><span class="line"></span><br><span class="line">console.log(obj.next());</span><br><span class="line">console.log(obj.next());</span><br><span class="line">console.log(obj.next());</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* genFunc() &#123;</span><br><span class="line">		yield 1;</span><br><span class="line">		yield 2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var obj = genFunc();</span><br><span class="line"></span><br><span class="line">console.log(obj.next());  // &#123; value: 1, done: false &#125;</span><br><span class="line">console.log(obj.next());  // &#123; value: 2, done: false &#125;</span><br><span class="line">console.log(obj.next());  // &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
+<p>实际上，生成器对象不仅仅是迭代器对象，其也是一个可迭代对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const it = obj[Symbol.iterator]();</span><br><span class="line">console.log(it.next()); // &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
 <p>参考：<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank" rel="noopener">《Iteration protocols - JavaScript | MDN》</a><br><a href="http://2ality.com/2013/06/iterators-generators.html#generators-as-threads" target="_blank" rel="noopener">《Iterators and generators in ECMAScript 6》</a></p>
 
       
