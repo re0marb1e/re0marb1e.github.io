@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="express是node.js中最流行的Web框架，而connect曾是express的核心，最新的express 4.x虽然已经把connect移除，自己实现了一套connect的接口，但是核心思想仍然没有变化。所以为了更好的学习express，理解connect框架的源码依然是很有帮助的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="connect框架源码解析">
+<meta property="og:url" content="http://yoursite.com/2018/03/24/connect-analysis/index.html">
+<meta property="og:site_name" content="岚山竹林 | re0marb1e&#39;s Bamboo Grove">
+<meta property="og:description" content="express是node.js中最流行的Web框架，而connect曾是express的核心，最新的express 4.x虽然已经把connect移除，自己实现了一套connect的接口，但是核心思想仍然没有变化。所以为了更好的学习express，理解connect框架的源码依然是很有帮助的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-24T16:07:03.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="connect框架源码解析">
+<meta name="twitter:description" content="express是node.js中最流行的Web框架，而connect曾是express的核心，最新的express 4.x虽然已经把connect移除，自己实现了一套connect的接口，但是核心思想仍然没有变化。所以为了更好的学习express，理解connect框架的源码依然是很有帮助的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/24/connect-analysis/"/>
+
+
+
+
+
+  <title>connect框架源码解析 | 岚山竹林 | re0marb1e's Bamboo Grove</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">岚山竹林 | re0marb1e's Bamboo Grove</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/24/connect-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="re0marb1e">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岚山竹林 | re0marb1e's Bamboo Grove">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">connect框架源码解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T23:33:17+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>express是node.js中最流行的Web框架，而connect曾是express的核心，最新的express 4.x虽然已经把connect移除，自己实现了一套connect的接口，但是核心思想仍然没有变化。所以为了更好的学习express，理解connect框架的源码依然是很有帮助的。</p>
+<a id="more"></a>
+<p>在看源码之前，我们先来看一下connect的基本使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var connect = require(&apos;connect&apos;);</span><br><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line"></span><br><span class="line">var app = connect();</span><br><span class="line"></span><br><span class="line">// respond to all requests</span><br><span class="line">app.use(function(req, res, next)&#123;</span><br><span class="line">  res.end(&apos;Hello from Connect!\n&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//create node.js http server and listen on port</span><br><span class="line">http.createServer(app).listen(3000);</span><br></pre></td></tr></table></figure>
+<p>从上可以看出，connect模块对外暴露的函数，其执行后应该返回形如<code>function(req, res){ }</code>的函数，且这个函数对象拥有<code>use</code>这个成员方法能够接受中间件函数，这个函数在nodejs原生的request达到后第一个执行，执行完后应该通过某种方式把控制权传递给后续的中间件函数。</p>
+<p>现在我们开始阅读connect源码，首先我们看到connect模块对外只暴露了<code>createServer</code>函数，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var merge = require(&apos;utils-merge&apos;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Module exports.</span><br><span class="line"> * @public</span><br><span class="line"> */</span><br><span class="line">module.exports = createServer;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Create a new connect server.</span><br><span class="line"> *</span><br><span class="line"> * @return &#123;function&#125;</span><br><span class="line"> * @public</span><br><span class="line"> */</span><br><span class="line">function createServer() &#123;</span><br><span class="line">  function app(req, res, next)&#123; app.handle(req, res, next); &#125;</span><br><span class="line">  merge(app, proto);</span><br><span class="line">  merge(app, EventEmitter.prototype);</span><br><span class="line">  app.route = &apos;/&apos;;</span><br><span class="line">  app.stack = [];</span><br><span class="line">  return app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如我们所想，该函数确实返回了形式相同的函数<code>function app(req, res, next){ app.handle(req, res, next); }</code>，并且把<code>proto</code>对象与<code>EventEmitter</code>原型对象的属性和方法合并给了该函数对象，同时增加了两个属性route与stack。</p>
+<p>这样，app函数对象拥有use，handle，listen三个成员方法。</p>
+<p>首先我们来看一下use函数，该函数把传入的路由地址与中间件函数以对象<code>{route: path, handle: handle }</code>的形式压进stack中，并返回app函数对象。</p>
+<p>当有请求产生时，app函数首先被调用，其内部将调用app.handle函数，handle函数内部定义了一个next函数，这个next函数也就是我们平常转移控制权给下一个中间件所使用的next函数。</p>
+<p>接下来我们来看一看这个next函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">function next(err) &#123;</span><br><span class="line">    if (slashAdded) &#123;</span><br><span class="line">      req.url = req.url.substr(1);</span><br><span class="line">      slashAdded = false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (removed.length !== 0) &#123;</span><br><span class="line">      req.url = protohost + removed + req.url.substr(protohost.length);</span><br><span class="line">      removed = &apos;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // next callback</span><br><span class="line">    var layer = stack[index++];</span><br><span class="line"></span><br><span class="line">    // all done</span><br><span class="line">    if (!layer) &#123;</span><br><span class="line">      defer(done, err);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // route data</span><br><span class="line">    var path = parseUrl(req).pathname || &apos;/&apos;;</span><br><span class="line">    var route = layer.route;</span><br><span class="line"></span><br><span class="line">    // skip this layer if the route doesn&apos;t match</span><br><span class="line">    if (path.toLowerCase().substr(0, route.length) !== route.toLowerCase()) &#123;</span><br><span class="line">      return next(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // skip if route match does not border &quot;/&quot;, &quot;.&quot;, or end</span><br><span class="line">    var c = path.length &gt; route.length &amp;&amp; path[route.length];</span><br><span class="line">    if (c &amp;&amp; c !== &apos;/&apos; &amp;&amp; c !== &apos;.&apos;) &#123;</span><br><span class="line">      return next(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // trim off the part of the url that matches the route</span><br><span class="line">    if (route.length !== 0 &amp;&amp; route !== &apos;/&apos;) &#123;</span><br><span class="line">      removed = route;</span><br><span class="line">      req.url = protohost + req.url.substr(protohost.length + removed.length);</span><br><span class="line"></span><br><span class="line">      // ensure leading slash</span><br><span class="line">      if (!protohost &amp;&amp; req.url[0] !== &apos;/&apos;) &#123;</span><br><span class="line">        req.url = &apos;/&apos; + req.url;</span><br><span class="line">        slashAdded = true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // call the layer handle</span><br><span class="line">    call(layer.handle, route, err, req, res, next);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>我们看到每一次调用<code>next()</code>，都会依次从<code>stack</code>中取出下一个对象（包含路由地址与中间件函数）作为<code>layer</code>，然后把请求地址与<code>layer.route</code>对比，如果匹配则调用<code>call(layer.handle, route, err, req, res, next)</code>。在<code>call</code>函数内部，将会调用<code>layer.handle</code>中间件函数。</p>
+<p>因此，每一次调用<code>next()</code>，控制权将会转移给下一个匹配的中间件，开发者可以根据需求来进行灵活的控制。</p>
+<p>再来细看一下<code>call(handle, route, err, req, res, next)</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Invoke a route handle.</span><br><span class="line"> * @private</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">function call(handle, route, err, req, res, next) &#123;</span><br><span class="line">  var arity = handle.length;</span><br><span class="line">  var error = err;</span><br><span class="line">  var hasError = Boolean(err);</span><br><span class="line"></span><br><span class="line">  debug(&apos;%s %s : %s&apos;, handle.name || &apos;&lt;anonymous&gt;&apos;, route, req.originalUrl);</span><br><span class="line"></span><br><span class="line">  try &#123;</span><br><span class="line">    if (hasError &amp;&amp; arity === 4) &#123;</span><br><span class="line">      // error-handling middleware</span><br><span class="line">      handle(err, req, res, next);</span><br><span class="line">      return;</span><br><span class="line">    &#125; else if (!hasError &amp;&amp; arity &lt; 4) &#123;</span><br><span class="line">      // request-handling middleware</span><br><span class="line">      handle(req, res, next);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; catch (e) &#123;</span><br><span class="line">    // replace the error</span><br><span class="line">    error = e;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // continue</span><br><span class="line">  next(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你会发现所有中间件函数的调用都在try…catch中，也就是中间件函数中发生的任何异常都不会被抛出。异常发生时，其会被赋给<code>error</code>变量，并且以<code>next(error)</code>的形式不断传递下去，直到遇到具有四个参数的中间件函数<code>function(err, req, res, next)</code>或者直到<code>defer(done, err)</code>调用<code>finalhandler</code>函数。</p>
+<p>总体看下来，connect模块并不是很复杂，但设计得却很精妙，使用起来简单灵活。而express继承了这些优点，所以受到了欢迎，于是node.js社区也产生了很多基于connect与express开发的中间件。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/technology-classification/" rel="next" title="技术分级">
+                <i class="fa fa-chevron-left"></i> 技术分级
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">re0marb1e</p>
+              <p class="site-description motion-element" itemprop="description">Range your dream</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">re0marb1e</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
