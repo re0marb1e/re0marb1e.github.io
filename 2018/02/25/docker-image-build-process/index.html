@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="javascript,ECMAScript6," />
+  <meta name="keywords" content="Docker," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。">
-<meta name="keywords" content="javascript,ECMAScript6">
+<meta name="description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="迭代协议">
-<meta property="og:url" content="https://re0marb1e.github.io/2017/03/10/iteration-protocols/index.html">
+<meta property="og:title" content="Docker镜像构建流程">
+<meta property="og:url" content="https://re0marb1e.github.io/2018/02/25/docker-image-build-process/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:description" content="ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。">
+<meta property="og:description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T13:57:15.261Z">
+<meta property="og:updated_time" content="2018-03-27T13:56:22.892Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="迭代协议">
-<meta name="twitter:description" content="ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。">
+<meta name="twitter:title" content="Docker镜像构建流程">
+<meta name="twitter:description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://re0marb1e.github.io/2017/03/10/iteration-protocols/"/>
+  <link rel="canonical" href="https://re0marb1e.github.io/2018/02/25/docker-image-build-process/"/>
 
 
 
 
 
-  <title>迭代协议 | re0marb1e's Bamboo Grove</title>
+  <title>Docker镜像构建流程 | re0marb1e's Bamboo Grove</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://re0marb1e.github.io/2017/03/10/iteration-protocols/">
+    <link itemprop="mainEntityOfPage" href="https://re0marb1e.github.io/2018/02/25/docker-image-build-process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="re0marb1e">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">迭代协议</h1>
+          <h1 class="post-title" itemprop="name headline">Docker镜像构建流程</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T15:23:51+08:00">
-                2017-03-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T21:53:10+08:00">
+                2018-02-25
               </time>
             
 
@@ -310,29 +310,38 @@
       
 
       
-        <p>ES6对ES5进行了补充，新增了两个协议：可迭代协议（The iterable protocol）和迭代器协议（The iterator protocol）。</p>
+        <p>构建Docker镜像一共有两种方法：第一种使用<code>docker commit</code>命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用<code>docker build</code>命令来构建镜像，其中Dockerfile实际上就是每一步对镜像所做变化的指令集，弥补了第一种方式的缺点，所以这种方式更适合用在生产环境中。</p>
 <a id="more"></a>
-<p>在搞清楚这两个协议之前，我们先弄清楚这两个概念：可迭代对象（the iterable object）与迭代器（the iterator）。</p>
-<p>顾名思义，可迭代对象代表这个对象是可以迭代的，例如可以用for…of循环取值，常见的Array与String都是可迭代对象。那么如何迭代该对象呢？这要求所有可迭代对象都实现一个<code>@@iterator</code>方法，该方法将返回一个迭代器对象，迭代器对象将遵循标准的规则产生一系列的值，所以当使用for…of循环取值时，其实也就是获取可迭代对象的迭代器对象，然后根据这个标准的规则来循环取值而已。</p>
-<p>上述中，可迭代对象如何产生一个迭代器这就属于可迭代协议的范畴，而迭代器如何以标准的方式产生一系列的值就属于迭代器协议的范畴。</p>
-<p>现在我们来总结一下：</p>
-<p>可迭代协议它允许对象定义自己的迭代行为。为了定义该迭代行为，对象必须实现@@iterator方法，也就是说对象必须有一个键值为@@iterator(<code>Symbol.iterator</code>)的成员方法，该方法接收零个参数，返回一个遵循迭代器协议的对象。</p>
+<p>那么，Docker是如何根据Dockerfile来构建镜像的呢？</p>
+<p>在讲述这个之前，我们先来理解一个概念：Docker构建上下文（docker build context）。首先Dockerfile编写完成后，肯定会有一个目录存放Dockerfile，而这个目录就是Docker的构建上下文，所有在构建过程中需要的文件必须存放在这个目录下。Docker会在构建镜像时将这个（构建上下文对应的）目录下的所有文件与目录都上传到Docker守护进程中，这样Docker守护进程就能在需要时直接访问这些文件。</p>
 <blockquote>
-<p><a href="">Symbol.iterator</a> return <code>iterator</code></p>
+<p>初学者可能会有疑问，为什么要把目录上传到Docker守护进程中，Docker守护进程直接访问目录不就行了。而实际上Docker设计上是一种C/S模式，Docker守护进程与Docker客户端程序是以Restful API来交互的，即使你在本地执行各种docker命令，实际上也是以远程调用的形式完成的。那么当服务器守护程序需要访问客户端的某些文件时该怎么办？于是就引入了构建上下文的概念，在客户端执行<code>docker build</code>的时候指定构建上下文，把路径下的所有内容打包上传给Docker守护进程。细心的你也会发现<code>docker build</code>执行后打印出的第一句话一般是”Sending build context to Docker daemon”.                              </p>
 </blockquote>
-<p>迭代器协议定义了一个标准的方式来产生一系列的值（可以有限也可以无限）。迭代器对象必须实现一个<code>next</code>方法，该方法接收零个参数，返回一个具有两个属性的对象。</p>
+<p>Docker服务端进程在接收了客户端程序发来的打包的构建上下文目录后，将正式构建镜像，构建过程将按如下流程执行：</p>
+<ol>
+<li>Docker从基础镜像运行一个容器；</li>
+<li>检查下一条指令，从缓存中查找是否有可重有的现有镜像，如果则直接使用该镜像并执行步骤5，否则执行步骤3；</li>
+<li>执行指令，对容器做出修改；</li>
+<li>执行类似docker commit的操作，提交一个新的镜像层；</li>
+<li>Docker再基于新的镜像运行一个新容器；</li>
+<li>执行步骤2，直到所有指令都执行完毕。</li>
+</ol>
+<p>当镜像构建完成后，最后镜像将被打上标签，至此所有操作执行完毕。</p>
 <blockquote>
-<p>next() return { done: <code>boolean</code>, value: <code>value</code>}<br>当done值为true代表迭代器对象过了迭代序列值的末端，当done值为false代表迭代器对象仍然能够产生下一个值。value值可以是任意的JavaScript对象，当done值为true时，value将被释放。</p>
+<p>上面我们看到构建镜像的时候会利用缓存机制来加快构建，Docker在构建镜像的时候会根据以下规则来匹配缓存镜像：</p>
 </blockquote>
-<p>有了上面这些基础，我们可以自己实现一个可迭代对象，一个简单的例子如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var numx2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">numx2[Symbol.iterator] = function ()&#123;</span><br><span class="line">	const loops = 10;</span><br><span class="line">	var curloop = 0;</span><br><span class="line">	return &#123;</span><br><span class="line">		next() &#123;</span><br><span class="line">			if(curloop &lt;= loops)&#123;</span><br><span class="line">				curloop++;</span><br><span class="line">				return &#123;</span><br><span class="line">					value: curloop * 2,</span><br><span class="line">					done: false</span><br><span class="line">				&#125;;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				return &#123;</span><br><span class="line">					done: true</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(demo of numx2)&#123;</span><br><span class="line">	console.log(demo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>除了for…of，ES6的扩展语法(Spread syntax)比如数组解构其原理也是使用了迭代器协议。<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const someString = &quot;Hello&quot;</span><br><span class="line">console.log([...someString])      // [ &apos;H&apos;, &apos;e&apos;, &apos;l&apos;, &apos;l&apos;, &apos;o&apos; ]</span><br></pre></td></tr></table></figure>
-<p>你会发现ES6的生成器对象也遵循迭代器协议，于是我们可以直接用生成器来定义迭代器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* genFunc() &#123;</span><br><span class="line">		yield 1;</span><br><span class="line">		yield 2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var obj = genFunc();</span><br><span class="line"></span><br><span class="line">console.log(obj.next());  // &#123; value: 1, done: false &#125;</span><br><span class="line">console.log(obj.next());  // &#123; value: 2, done: false &#125;</span><br><span class="line">console.log(obj.next());  // &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
-<p>实际上，生成器对象不仅仅是迭代器对象，其也是一个可迭代对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const it = obj[Symbol.iterator]();</span><br><span class="line">console.log(it.next()); // &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank" rel="noopener">《Iteration protocols - JavaScript | MDN》</a><br><a href="http://2ality.com/2013/06/iterators-generators.html#generators-as-threads" target="_blank" rel="noopener">《Iterators and generators in ECMAScript 6》</a></p>
+<ul>
+<li>从已经在缓存中的父镜像开始，将下一个指令与从该基本镜像导出的所有子镜像进行比较，以查看其中一个是否使用完全相同的指令构建。如果没有，则缓存无效。</li>
+<li>在大多数情况下，只需将Dockerfile中的指令与其中一个子镜像进行比较即可（通过比较是否与上一次执行的指令一致）。但是，某些指令需要一些额外的检查。</li>
+<li>对于ADD和COPY指令，将检查镜像中文件的内容，并为每个文件计算校验和。在这些校验和中不考虑文件的最后修改和最后访问的时间。在缓存查找期间，将校验和与现有映像中的校验和进行比较。如果文件（如内容和元数据）中有任何变化，则缓存无效。</li>
+<li>除了ADD和COPY命令之外，缓存检查将不会查看容器中的文件来确定缓存匹配。例如，当处理RUN apt-get -y update命令时，不会检查在容器中更新的文件以确定是否存在高速缓存命中，它将只会检查命令字符串是否与之前的一致来判断是否匹配。<blockquote>
+</blockquote>
+一旦某一层的缓存无效，所有后续的Dockerfile命令将生成新的镜像，并且高速缓存将不被使用。</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://www.dockerbook.com/" target="_blank" rel="noopener">《The Docker Book》</a></p>
+<p><a href="https://www.gitbook.com/book/yeasy/docker_practice" target="_blank" rel="noopener">《Docker — 从入门到实践》</a></p>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#build-cache" target="_blank" rel="noopener">《Best practices for writing Dockerfiles》</a></p>
 
       
     </div>
@@ -350,9 +359,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
-          
-            <a href="/tags/ECMAScript6/" rel="tag"># ECMAScript6</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
         </div>
       
@@ -365,15 +372,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/11/connect-analysis/" rel="next" title="connect源码解析">
+                <i class="fa fa-chevron-left"></i> connect源码解析
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/30/technology-classification/" rel="prev" title="技术分级">
-                技术分级 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
