@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。 首先我们来看看JavaScript中是如何创建一个对象的。 123const str = new String(&apos;Hello, World!">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解原型链">
+<meta property="og:url" content="https://re0marb1e.github.io/2017/08/07/prototype-and-proto/index.html">
+<meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
+<meta property="og:description" content="原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。 首先我们来看看JavaScript中是如何创建一个对象的。 123const str = new String(&apos;Hello, World!">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-07T09:00:26.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解原型链">
+<meta name="twitter:description" content="原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。 首先我们来看看JavaScript中是如何创建一个对象的。 123const str = new String(&apos;Hello, World!">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://re0marb1e.github.io/2017/08/07/prototype-and-proto/"/>
+
+
+
+
+
+  <title>深入理解原型链 | re0marb1e's Bamboo Grove</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">re0marb1e's Bamboo Grove</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Range your dream</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-recommendations">
+          <a href="/recommendations/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            推荐
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://re0marb1e.github.io/2017/08/07/prototype-and-proto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="re0marb1e">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="re0marb1e's Bamboo Grove">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解原型链</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-07T16:20:59+08:00">
+                2017-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。</p>
+<p>首先我们来看看JavaScript中是如何创建一个对象的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'Hello, World!'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(str); <span class="comment">// String &#123;"Hello, World!", length: 13, __proto__: String&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(str.split(<span class="string">','</span>)); <span class="comment">// ["Hello", " World!"]</span></span><br></pre></td></tr></table></figure>
+<p>我们可以看到String的实例对象str只有<code>length</code>和<code>__proto__</code>两个属性与方法，那么为何实例对象却可以调用<code>split()</code>方法呢？</p>
+<p>答案就是JavaScript原型链，当调用对象的某一个方法或者访问对象的某一个属性时(比如调用<code>str.split()</code>)，如果该对象不存在对应的方法与属性，那么JS就会自动寻找该对象的原型对象(比如<code>str.__proto__</code>)中相应的方法与属性，如果找到了则使用对应的方法与属性，如果找不到，则继续寻找该原型对象的原型对象，直到达到原型对象的顶端如果还未找到则抛出异常。</p>
+<a id="more"></a>
+<h2 id="proto-与prototype"><a href="#proto-与prototype" class="headerlink" title="__proto__与prototype"></a><code>__proto__</code>与<code>prototype</code></h2><p>常见的JavaScript引擎都实现了一个<code>__proto__</code>属性，用户可以通过该属性访问对象的原型对象。但是当一个新的JavaScript对象被创建之后，JavaScript引擎是如何指定其原型对象的呢（也就是<code>__proto__</code>属性是如何来的）？</p>
+<p>当你创建一个函数时，JavaScript引擎会自动为这个函数添加<code>prototype</code>属性，该属性的值默认是包含<code>constructor</code>与<code>__proto__</code>两个属性的对象：其中<code>constructor</code>属性指向原函数（我们可以得出结论<code>Func.prototype.constructor === Func</code>），<code>__proto__</code>属性指向<code>Object.prototype</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Func.prototype); <span class="comment">// &#123;constructor: f Func(), __proto__: Object &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(Func.prototype.__proto__ === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>当你把这个函数当作构造函数使用（既使用new关键字来调用）来创建该构造函数的一个实例时，JavaScript引擎又将自动为该实例添加一个<code>__proto__</code>属性，并把该<code>__proto__</code>属性指向构造函数的<code>prototype</code>属性的值对象（我们可以得出结论<code>func.__proto__ === Func.prototype</code>）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> func = <span class="keyword">new</span> Func;</span><br><span class="line"><span class="built_in">console</span>.log(func.__proto__ === Func.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数的原型对象"><a href="#函数的原型对象" class="headerlink" title="函数的原型对象"></a>函数的原型对象</h2><p>在JavaScript中，函数也是对象，那么函数的原型对象是什么呢？</p>
+<p>我们知道JavaScript中有三种定于函数的方式：函数定义语句，函数直接量表达式，Function()构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func1</span>(<span class="params">str</span>)</span>&#123; <span class="comment">// 函数定义语句</span></span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> func2 = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123; <span class="comment">// 函数直接量表达式</span></span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> func3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"str"</span>, <span class="string">"return str"</span>); <span class="comment">// Function()构造函数</span></span><br></pre></td></tr></table></figure>
+<p>由第三种函数定义方式，我们很容易推测出一般函数的原型对象就是<code>Function.prototype</code>，事实上，不管是用户定义的函数，还是JavaScript内置的函数，甚至<code>Function</code>构造函数自身，其原型对象都是<code>Function.prototype</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Func.__proto__); <span class="comment">// ƒ () &#123; [native code] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(Func.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://github.com/creeperyang/blog/issues/9" target="_blank" rel="noopener">《从<strong>proto</strong>和prototype来深入理解JS对象和原型链》</a><br><a href="https://zhuanlan.zhihu.com/p/22989691?utm_source=com.google.android.apps.messaging&amp;utm_medium=social" target="_blank" rel="noopener">《JavaScript 世界万物诞生记》</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/11/connect-analysis/" rel="next" title="connect源码解析">
+                <i class="fa fa-chevron-left"></i> connect源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/25/docker-image-build-process/" rel="prev" title="Docker镜像构建流程">
+                Docker镜像构建流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="re0marb1e" />
+            
+              <p class="site-author-name" itemprop="name">re0marb1e</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#proto-与prototype"><span class="nav-number">1.</span> <span class="nav-text">__proto__与prototype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的原型对象"><span class="nav-number">2.</span> <span class="nav-text">函数的原型对象</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">re0marb1e</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
