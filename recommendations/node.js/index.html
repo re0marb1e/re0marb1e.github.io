@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
 <meta property="og:description" content="书籍推荐 《Node.js in Action, Second Edition》一本不错的Node.js入门书，但本书有部分内容已过时，比如关于koa，kraken，hapi的部分等。  《An Introduction to libuv》  《libuv中文教程》  《深入理解Node.js：核心思想与源码分析》  《Node.js 调试指南》  《Express in Action》讲述Exp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-24T14:54:30.281Z">
+<meta property="og:updated_time" content="2018-05-15T08:50:36.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js阅读推荐">
 <meta name="twitter:description" content="书籍推荐 《Node.js in Action, Second Edition》一本不错的Node.js入门书，但本书有部分内容已过时，比如关于koa，kraken，hapi的部分等。  《An Introduction to libuv》  《libuv中文教程》  《深入理解Node.js：核心思想与源码分析》  《Node.js 调试指南》  《Express in Action》讲述Exp">
@@ -320,8 +320,6 @@
 </li>
 <li><p><span class="label success">socket.io</span> <a href="https://socket.io/" target="_blank" rel="noopener"><strong>Official Site</strong></a> <a href="https://github.com/socketio/socket.io/" target="_blank" rel="noopener">GitHub</a><br>Realtime application framework (Node.JS server)</p>
 </li>
-<li><p><span class="label success">pm2</span> <a href="http://pm2.keymetrics.io/" target="_blank" rel="noopener"><strong>Official Site</strong></a> <a href="https://github.com/Unitech/PM2/" target="_blank" rel="noopener">GitHub</a><br>Node.js Production Process Manager with a built-in Load Balancer</p>
-</li>
 <li><p><span class="label success">pug</span> <a href="https://pugjs.org" target="_blank" rel="noopener"><strong>Official Site</strong></a> <a href="https://github.com/pugjs/pug" target="_blank" rel="noopener">GitHub</a><br>Robust, elegant, feature rich template engine for Node.js</p>
 </li>
 </ul>
@@ -393,31 +391,38 @@
 <li><p><code>node-mongodb-native</code> <a href="https://github.com/mongodb/node-mongodb-native" target="_blank" rel="noopener">GitHub</a></p>
 </li>
 </ul>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
-<li><p><code>forever</code> <a href="https://github.com/foreverjs/forever" target="_blank" rel="noopener">GitHub</a> <a href="https://www.npmjs.com/package/forever" target="_blank" rel="noopener">npm</a><br>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever)</p>
-</li>
-<li><p><code>node-formidable</code> <a href="https://github.com/felixge/node-formidable" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>node-glob</code> <a href="https://github.com/isaacs/node-glob" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>request</code> <a href="https://github.com/request/request" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>node-htmlparser</code> <a href="https://github.com/tautologistics/node-htmlparser" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>step</code> <a href="https://github.com/creationix/step" target="_blank" rel="noopener">GitHub</a><br>An async control-flow library that makes stepping through logic easy.</p>
-</li>
-<li><p><code>node-seq</code> <a href="https://github.com/substack/node-seq" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>node-readability</code> <a href="https://www.npmjs.com/package/node-readability" target="_blank" rel="noopener">GitHub</a><br>Turn any web page into a clean view</p>
-</li>
-<li><p><code>bcrypt</code> <a href="https://github.com/kelektiv/node.bcrypt.js" target="_blank" rel="noopener">GitHub</a> <a href="https://www.npmjs.com/package/bcrypt" target="_blank" rel="noopener">npm</a></p>
-</li>
-<li><p><code>polemo</code> <a href="https://github.com/NetEase/pomelo" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-<li><p><code>nw.js</code> <a href="https://github.com/nwjs/nw.js" target="_blank" rel="noopener">GitHub</a></p>
-</li>
-</ul>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><pre><code>-   `pm2` [**Official Site**](http://pm2.keymetrics.io/) [GitHub](https://github.com/Unitech/PM2/)
+    Node.js Production Process Manager with a built-in Load Balancer
 
+-   `nodemon` [**Official Site**](http://nodemon.io/)
+
+-   `forever` [GitHub](https://github.com/foreverjs/forever) [npm](https://www.npmjs.com/package/forever)
+    A simple CLI tool for ensuring that a given script runs continuously (i.e. forever)
+</code></pre><h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><pre><code>-   `log4js` [**Official Site**](https://log4js-node.github.io/log4js-node/) [GitHub](https://github.com/log4js-node/log4js-node) [npm](https://www.npmjs.com/package/log4js)
+
+-   `bunyan` [GitHub](https://github.com/trentm/node-bunyan) [npm](https://www.npmjs.com/package/bunyan)
+</code></pre><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><pre><code>- `node-formidable` [GitHub](https://github.com/felixge/node-formidable)
+
+- `node-glob` [GitHub](https://github.com/isaacs/node-glob)
+
+- `request` [GitHub](https://github.com/request/request)
+
+- `node-htmlparser` [GitHub](https://github.com/tautologistics/node-htmlparser)
+
+- `step` [GitHub](https://github.com/creationix/step)
+An async control-flow library that makes stepping through logic easy.
+
+- `node-seq` [GitHub](https://github.com/substack/node-seq)
+
+- `node-readability` [GitHub](https://www.npmjs.com/package/node-readability)
+Turn any web page into a clean view
+
+- `bcrypt` [GitHub](https://github.com/kelektiv/node.bcrypt.js) [npm](https://www.npmjs.com/package/bcrypt)
+
+- `polemo` [GitHub](https://github.com/NetEase/pomelo)
+
+- `nw.js` [GitHub](https://github.com/nwjs/nw.js)
+</code></pre>
         
       </div>
       
@@ -534,7 +539,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书籍推荐"><span class="nav-number">1.</span> <span class="nav-text">书籍推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博文推荐"><span class="nav-number">2.</span> <span class="nav-text">博文推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站与项目推荐"><span class="nav-number">3.</span> <span class="nav-text">网站与项目推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网站"><span class="nav-number">3.1.</span> <span class="nav-text">网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目"><span class="nav-number">3.2.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#个人推荐"><span class="nav-number">3.2.1.</span> <span class="nav-text">个人推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Framwork"><span class="nav-number">3.2.2.</span> <span class="nav-text">Framwork</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模版"><span class="nav-number">3.2.3.</span> <span class="nav-text">模版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">3.2.4.</span> <span class="nav-text">数据库相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">3.2.5.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书籍推荐"><span class="nav-number">1.</span> <span class="nav-text">书籍推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博文推荐"><span class="nav-number">2.</span> <span class="nav-text">博文推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站与项目推荐"><span class="nav-number">3.</span> <span class="nav-text">网站与项目推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网站"><span class="nav-number">3.1.</span> <span class="nav-text">网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目"><span class="nav-number">3.2.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#个人推荐"><span class="nav-number">3.2.1.</span> <span class="nav-text">个人推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Framwork"><span class="nav-number">3.2.2.</span> <span class="nav-text">Framwork</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模版"><span class="nav-number">3.2.3.</span> <span class="nav-text">模版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">3.2.4.</span> <span class="nav-text">数据库相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署"><span class="nav-number">3.2.5.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志"><span class="nav-number">3.2.6.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">3.2.7.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
