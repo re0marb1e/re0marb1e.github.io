@@ -278,9 +278,8 @@ p {
 }
 a {
   color: #555;
-  text-decoration: none;
+  text-decoration: underline;
   outline: none;
-  border-bottom: 1px solid #999;
   word-wrap: break-word;
 }
 a:hover {
@@ -292,7 +291,6 @@ blockquote {
   padding: 0;
 }
 img {
-  display: block;
   margin: auto;
   max-width: 100%;
   height: auto;
@@ -1203,6 +1201,7 @@ pre .javascript .function {
   display: block;
   font-size: 13px;
   line-height: inherit;
+  text-decoration: none;
   border-bottom: 1px solid transparent;
   transition-property: border-color;
   transition-duration: 0.2s;
@@ -1330,7 +1329,6 @@ pre .javascript .function {
   box-sizing: border-box;
   margin: auto;
   padding: 3px;
-  border: 1px solid #ddd;
 }
 .posts-expand .post-body .fancybox img {
   margin: 0 auto 25px;
@@ -1823,7 +1821,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e4ff78;
+  background: #d95b2d;
 }
 .links-of-blogroll {
   font-size: 13px;

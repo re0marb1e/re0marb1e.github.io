@@ -75,13 +75,17 @@
 
 
 
+<meta name="description" content="多版本环境管理你可能会遇到一些情况需要在同一个操作系统上安装不同版本的语言环境，比如你想体验一下最新的Java10，同时某些软件只支持Java8，于是你必须同时保留两个环境，同时你还需要能够在操作系统上切换两个版本的Java环境。对于上述问题，很多语言都有相对应的工具来帮助你轻松解决，比如jEnv，rvm等。下面整理了各种语言的多版本环境管理工具的介绍以及简单的使用说明。 Java推荐使用jEnv">
 <meta property="og:type" content="website">
-<meta property="og:title" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:url" content="http://blog.re0marb1e.cn/tags/anecdote/index.html">
+<meta property="og:title" content="多版本环境管理">
+<meta property="og:url" content="http://blog.re0marb1e.cn/recommendations/version-manager/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
+<meta property="og:description" content="多版本环境管理你可能会遇到一些情况需要在同一个操作系统上安装不同版本的语言环境，比如你想体验一下最新的Java10，同时某些软件只支持Java8，于是你必须同时保留两个环境，同时你还需要能够在操作系统上切换两个版本的Java环境。对于上述问题，很多语言都有相对应的工具来帮助你轻松解决，比如jEnv，rvm等。下面整理了各种语言的多版本环境管理工具的介绍以及简单的使用说明。 Java推荐使用jEnv">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-26T15:56:38.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="re0marb1e&#39;s Bamboo Grove">
+<meta name="twitter:title" content="多版本环境管理">
+<meta name="twitter:description" content="多版本环境管理你可能会遇到一些情况需要在同一个操作系统上安装不同版本的语言环境，比如你想体验一下最新的Java10，同时某些软件只支持Java8，于是你必须同时保留两个环境，同时你还需要能够在操作系统上切换两个版本的Java环境。对于上述问题，很多语言都有相对应的工具来帮助你轻松解决，比如jEnv，rvm等。下面整理了各种语言的多版本环境管理工具的介绍以及简单的使用说明。 Java推荐使用jEnv">
 
 
 
@@ -111,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.re0marb1e.cn/tags/anecdote/"/>
+  <link rel="canonical" href="http://blog.re0marb1e.cn/recommendations/version-manager/"/>
 
 
 
 
 
-  <title>标签: 杂谈 | re0marb1e's Bamboo Grove</title>
+  <title>多版本环境管理 | re0marb1e's Bamboo Grove</title>
   
 
 
@@ -136,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,54 +224,57 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>杂谈<small>标签</small>
-        </h1>
-      </div>
+	<h1 class="post-title" itemprop="name headline">多版本环境管理</h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
         
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/05/30/technology-classification/" itemprop="url">
-              
-                <span itemprop="name">技术分级</span>
-              
-            </a>
-        
-      </h2>
+          <h1 id="多版本环境管理"><a href="#多版本环境管理" class="headerlink" title="多版本环境管理"></a>多版本环境管理</h1><p>你可能会遇到一些情况需要在同一个操作系统上安装不同版本的语言环境，比如你想体验一下最新的Java10，同时某些软件只支持Java8，于是你必须同时保留两个环境，同时你还需要能够在操作系统上切换两个版本的Java环境。对于上述问题，很多语言都有相对应的工具来帮助你轻松解决，比如<a href="http://www.jenv.be/" target="_blank" rel="noopener"><code>jEnv</code></a>，<code>rvm</code>等。下面整理了各种语言的多版本环境管理工具的介绍以及简单的使用说明。</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p>推荐使用<a href="http://www.jenv.be/" target="_blank" rel="noopener"><code>jEnv</code></a>来管理不同的Jav环境</p>
+<ol>
+<li><p>安装执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install jenv</span><br><span class="line">echo &apos;export PATH=&quot;$HOME/.jenv/bin:$PATH&quot;&apos; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &apos;eval &quot;$(jenv init -)&quot;&apos; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://www.jenv.be/" target="_blank" rel="noopener"><code>jEnv</code></a>并不会自动识别系统已经安装的Java环境，需要用户通过手动添加。</p>
+<p>手动添加Java环境执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.jenv/versions</span><br><span class="line">jenv add /Library/Java/JavaVirtualMachines/&lt;jdk-version&gt;/Contents/Home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Java环境添加完成后</p>
+<ul>
+<li>通过<code>jenv versions</code>可以列出所有的Java环境</li>
+<li>通过<code>jenv version</code>查看当前的Java环境</li>
+<li>通过<code>jenv remove &lt;jdk-version&gt;</code>移除指定的Java环境</li>
+<li>通过<code>jenv global &lt;jdk-version&gt;</code>配置全局Java环境</li>
+<li>通过<code>jenv local &lt;jdk-version&gt;</code>配置本地Java环境</li>
+<li>通过<code>jenv shell &lt;jdk-version&gt;</code>配置ShellJava环境</li>
+</ul>
+</li>
+</ol>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-30T20:18:36+08:00"
-              content="2017-05-30" >
-          05-30
-        </time>
+        
       </div>
-
-    </header>
-  </article>
-
-
+      
+      
       
     </div>
-
+    
+    
+    
   </div>
-  
-  
-  
-
-  
 
 
           </div>
@@ -275,6 +282,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -295,8 +306,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -351,6 +371,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多版本环境管理"><span class="nav-number">1.</span> <span class="nav-text">多版本环境管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">1.1.</span> <span class="nav-text">Java</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -484,6 +520,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
