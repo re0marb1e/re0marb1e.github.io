@@ -75,17 +75,17 @@
 
 
 
-<meta name="description" content="书籍推荐博文推荐网站与项目推荐网站 php  项目标准 fig-standards Official SiteStandards either proposed or approved by the Framework Interop Group  psr.phphub.org Official SitePHP 标准规范中文版   框架 laravel Official Site thinkphp">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PHP阅读推荐">
-<meta property="og:url" content="http://blog.re0marb1e.cn/recommendations/php/index.html">
+<meta name="description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka入门教程（其一）：Kafka安装与配置">
+<meta property="og:url" content="http://blog.re0marb1e.cn/2018/08/27/kafka-setup/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:description" content="书籍推荐博文推荐网站与项目推荐网站 php  项目标准 fig-standards Official SiteStandards either proposed or approved by the Framework Interop Group  psr.phphub.org Official SitePHP 标准规范中文版   框架 laravel Official Site thinkphp">
+<meta property="og:description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-27T15:44:31.000Z">
+<meta property="og:updated_time" content="2018-08-27T08:23:28.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP阅读推荐">
-<meta name="twitter:description" content="书籍推荐博文推荐网站与项目推荐网站 php  项目标准 fig-standards Official SiteStandards either proposed or approved by the Framework Interop Group  psr.phphub.org Official SitePHP 标准规范中文版   框架 laravel Official Site thinkphp">
+<meta name="twitter:title" content="Kafka入门教程（其一）：Kafka安装与配置">
+<meta name="twitter:description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
 
 
 
@@ -115,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.re0marb1e.cn/recommendations/php/"/>
+  <link rel="canonical" href="http://blog.re0marb1e.cn/2018/08/27/kafka-setup/"/>
 
 
 
 
 
-  <title>PHP阅读推荐 | re0marb1e's Bamboo Grove</title>
+  <title>Kafka入门教程（其一）：Kafka安装与配置 | re0marb1e's Bamboo Grove</title>
   
 
 
@@ -226,61 +226,150 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.re0marb1e.cn/2018/08/27/kafka-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="re0marb1e">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="re0marb1e's Bamboo Grove">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">PHP阅读推荐</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h2><h2 id="博文推荐"><a href="#博文推荐" class="headerlink" title="博文推荐"></a>博文推荐</h2><h2 id="网站与项目推荐"><a href="#网站与项目推荐" class="headerlink" title="网站与项目推荐"></a>网站与项目推荐</h2><h3 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h3><ul>
-<li><a href="http://php.net/" target="_blank" rel="noopener">php</a></li>
-</ul>
-<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><h4 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h4><ul>
-<li><p><code>fig-standards</code> <a href="https://www.php-fig.org/" target="_blank" rel="noopener">Official Site</a><br>Standards either proposed or approved by the Framework Interop Group</p>
-</li>
-<li><p><code>psr.phphub.org</code> <a href="https://psr.phphub.org/" target="_blank" rel="noopener">Official Site</a><br>PHP 标准规范中文版</p>
-</li>
-</ul>
-<h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><ul>
-<li><code>laravel</code> <a href="https://laravel.com/" target="_blank" rel="noopener">Official Site</a></li>
-<li><code>thinkphp</code> <a href="http://www.thinkphp.cn/" target="_blank" rel="noopener">Official Site</a></li>
-<li><code>symfony</code> <a href="http://symfony.com/" target="_blank" rel="noopener">Official Site</a></li>
-</ul>
-<h4 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h4><ul>
-<li><code>composer</code> <a href="https://getcomposer.org/" target="_blank" rel="noopener">Official Site</a></li>
-</ul>
-<h4 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h4><ul>
-<li><code>guzzle</code> <a href="http://docs.guzzlephp.org/en/stable/" target="_blank" rel="noopener">Official Site</a></li>
-</ul>
-<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><ul>
-<li><code>monolog</code> <a href="https://seldaek.github.io/monolog/" target="_blank" rel="noopener">Official Site</a></li>
-</ul>
-<h4 id="产品"><a href="#产品" class="headerlink" title="产品"></a>产品</h4><ul>
-<li><code>flarum</code> <a href="http://flarum.org/" target="_blank" rel="noopener">Official Site</a></li>
-<li><code>typecho</code> <a href="http://typecho.org/" target="_blank" rel="noopener">Official Site</a></li>
-<li><code>Magento</code> <a href="https://magento.com/" target="_blank" rel="noopener">Official Site</a></li>
-</ul>
-
+          <h1 class="post-title" itemprop="name headline">Kafka入门教程（其一）：Kafka安装与配置</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T16:22:50+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我们将通过homebrew来安装Kafka，有关homebrew的详情请查看<a href="https://brew.sh/" target="_blank" rel="noopener">homebrew</a></p>
+<p>首先，我们需要安装Java环境，你可以去<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">官网</a>直接下载Java的安装包点击运行安装，或者你也可以通过<code>brew cask</code>来安装。</p>
+<p>接下来，我们安装ZooKeeper，运行<code>brew install zookeeper</code>，安装完成后你会在<code>/usr/local/etc/zookeeper/</code>目录下看到ZooKeeper的配置文件。</p>
+<p>最后，我们安装Kafka，运行<code>brew install kafka</code>，安装完成后你会在<code>/usr/local/etc/kafka/</code>目录下看到Kafka的配置文件，至此，整个Kafka的安装流程就完成了。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>首先我们启动ZooKeeper，你可以直接运行<code>zkServer start</code>来启动ZooKeeper，这将使用默认的配置（<code>/usr/local/etc/zookeeper/zoo.cfg</code>），然后可以通过<code>zkServer status</code>来查看ZooKeeper的运行状态，<code>zkServer stop</code>来停止ZooKeeper的运行。此外，这里推荐你使用<code>brew services</code>服务来启动ZooKeeper，<code>brew services</code>提供一致的命令来管理所有后台服务，可以通过<code>brew services run | start | stop | restart &lt;formula&gt;</code>来完成启动停止对应的服务，于是这里我们运行<code>brew services start zookeeper</code>来启动ZooKeeper。</p>
+<p>当系统提示ZooKeeper启动成功后，可以通过<code>zkCli</code>来验证ZooKeeper服务的可用性，运行<code>zkCli</code>，当看到<code>WatchedEvent state:SyncConnected</code>的字样时，代表ZooKeeper服务运行正常。</p>
+<p>接下来我们启动Kafka，在启动Kafka之前我们先来修改一下Kafka的配置。默认情况下，Kafka会使用ZooKeeper的根路径作为自己的chroot，考虑到ZooKeeper服务存在共享给其他应用使用的可能，所以我们最好配置自己的chroot，这样可以确保不会冲突。于是，我们打开<code>server.properties</code>文件，修改配置项<code>zookeeper.connect</code>为<code>zookeeper.connect=localhost:2181/kafka</code>，然后保存文件。</p>
+<p>ZooKeeper和Kafka还有很多丰富的配置项，但是作为入门，目前不需要太过关心，现在我们可以启动Kafka了。</p>
+<p>你可以通过自带的命令<code>kafka-server-start</code>与<code>kafka-server-stop</code>来启动与停止Kafka，也可以通过我们推荐的<code>brew services</code>来启动停止Kafka。</p>
+<p>当Kafka启动完成后，运行<code>zkCli</code>命令进入ZooKeeper控制台，在控制台内运行<code>ls /</code>，我们会发现ZooKeeper数据结构中多出了<code>kafka</code>这个路径，该路径下存放的都是Kafka运行所需要的数据。</p>
+<p>当完成以上的所有步骤后，你大概了解了Kafka的安装与配置，对于Kafka命令行的使用请参考<a href="">下一节(敬请期待)</a>。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/git-conventional-commit/" rel="next" title="规范的Git代码提交说明">
+                <i class="fa fa-chevron-left"></i> 规范的Git代码提交说明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -342,7 +431,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -388,7 +477,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书籍推荐"><span class="nav-number">1.</span> <span class="nav-text">书籍推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博文推荐"><span class="nav-number">2.</span> <span class="nav-text">博文推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站与项目推荐"><span class="nav-number">3.</span> <span class="nav-text">网站与项目推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网站"><span class="nav-number">3.1.</span> <span class="nav-text">网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目"><span class="nav-number">3.2.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标准"><span class="nav-number">3.2.1.</span> <span class="nav-text">标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架"><span class="nav-number">3.2.2.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包管理"><span class="nav-number">3.2.3.</span> <span class="nav-text">包管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Http"><span class="nav-number">3.2.4.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志"><span class="nav-number">3.2.5.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#产品"><span class="nav-number">3.2.6.</span> <span class="nav-text">产品</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li></ol></div>
             
 
           </div>
