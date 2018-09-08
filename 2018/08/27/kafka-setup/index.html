@@ -64,7 +64,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Kafka," />
 
 
 
@@ -75,17 +75,18 @@
 
 
 
-<meta name="description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
+<meta name="description" content="本节主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
+<meta name="keywords" content="Kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka入门教程（其一）：Kafka安装与配置">
+<meta property="og:title" content="Kafka入门教程（其一）：Kafka基本安装与配置">
 <meta property="og:url" content="http://blog.re0marb1e.cn/2018/08/27/kafka-setup/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
+<meta property="og:description" content="本节主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-27T08:23:28.358Z">
+<meta property="og:updated_time" content="2018-09-04T03:22:12.090Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kafka入门教程（其一）：Kafka安装与配置">
-<meta name="twitter:description" content="本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
+<meta name="twitter:title" content="Kafka入门教程（其一）：Kafka基本安装与配置">
+<meta name="twitter:description" content="本节主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。">
 
 
 
@@ -121,7 +122,7 @@
 
 
 
-  <title>Kafka入门教程（其一）：Kafka安装与配置 | re0marb1e's Bamboo Grove</title>
+  <title>Kafka入门教程（其一）：Kafka基本安装与配置 | re0marb1e's Bamboo Grove</title>
   
 
 
@@ -255,7 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kafka入门教程（其一）：Kafka安装与配置</h1>
+          <h1 class="post-title" itemprop="name headline">Kafka入门教程（其一）：Kafka基本安装与配置</h1>
         
 
         <div class="post-meta">
@@ -305,12 +306,16 @@
       
 
       
-        <p>本文主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。</p>
+        <p>本节主要介绍macOS系统下Kafka的安装与配置，阅读本文之前请确保自己有一定的Java知识与ZooKeeper知识。</p>
 <a id="more"></a>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我们将通过homebrew来安装Kafka，有关homebrew的详情请查看<a href="https://brew.sh/" target="_blank" rel="noopener">homebrew</a></p>
-<p>首先，我们需要安装Java环境，你可以去<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">官网</a>直接下载Java的安装包点击运行安装，或者你也可以通过<code>brew cask</code>来安装。</p>
-<p>接下来，我们安装ZooKeeper，运行<code>brew install zookeeper</code>，安装完成后你会在<code>/usr/local/etc/zookeeper/</code>目录下看到ZooKeeper的配置文件。</p>
-<p>最后，我们安装Kafka，运行<code>brew install kafka</code>，安装完成后你会在<code>/usr/local/etc/kafka/</code>目录下看到Kafka的配置文件，至此，整个Kafka的安装流程就完成了。</p>
+<p>首先，我们需要安装Java环境，你可以去<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">官网</a>直接下载Java SE的安装包点击运行安装，或者你也可以通过<code>brew cask</code>来安装。</p>
+<p>接下来，我们安装ZooKeeper，运行<code>brew install zookeeper</code>，安装完成后，你会在<code>/usr/local/etc/zookeeper/</code>目录下看到ZooKeeper的配置文件如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── defaults</span><br><span class="line">├── log4j.properties</span><br><span class="line">├── zoo.cfg</span><br><span class="line">└── zoo_sample.cfg</span><br></pre></td></tr></table></figure>
+<p>我们打开<code>zoo.cfg</code>，找到<code>clientPort=2181</code>配置项，通过修改这个可以改变ZooKeeper对外服务的端口号。</p>
+<p>最后，我们安装Kafka，运行<code>brew install kafka</code>，安装完成后，你会在<code>/usr/local/etc/kafka/</code>目录下看到Kafka的配置文件如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── connect-console-sink.properties</span><br><span class="line">├── connect-console-source.properties</span><br><span class="line">├── connect-distributed.properties</span><br><span class="line">├── connect-file-sink.properties</span><br><span class="line">├── connect-file-source.properties</span><br><span class="line">├── connect-log4j.properties</span><br><span class="line">├── connect-standalone.properties</span><br><span class="line">├── consumer.properties</span><br><span class="line">├── log4j.properties</span><br><span class="line">├── producer.properties</span><br><span class="line">├── server.properties</span><br><span class="line">├── tools-log4j.properties</span><br><span class="line">└── zookeeper.properties</span><br></pre></td></tr></table></figure>
+<p>至此，整个Kafka的安装流程就完成了。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>首先我们启动ZooKeeper，你可以直接运行<code>zkServer start</code>来启动ZooKeeper，这将使用默认的配置（<code>/usr/local/etc/zookeeper/zoo.cfg</code>），然后可以通过<code>zkServer status</code>来查看ZooKeeper的运行状态，<code>zkServer stop</code>来停止ZooKeeper的运行。此外，这里推荐你使用<code>brew services</code>服务来启动ZooKeeper，<code>brew services</code>提供一致的命令来管理所有后台服务，可以通过<code>brew services run | start | stop | restart &lt;formula&gt;</code>来完成启动停止对应的服务，于是这里我们运行<code>brew services start zookeeper</code>来启动ZooKeeper。</p>
 <p>当系统提示ZooKeeper启动成功后，可以通过<code>zkCli</code>来验证ZooKeeper服务的可用性，运行<code>zkCli</code>，当看到<code>WatchedEvent state:SyncConnected</code>的字样时，代表ZooKeeper服务运行正常。</p>
 <p>接下来我们启动Kafka，在启动Kafka之前我们先来修改一下Kafka的配置。默认情况下，Kafka会使用ZooKeeper的根路径作为自己的chroot，考虑到ZooKeeper服务存在共享给其他应用使用的可能，所以我们最好配置自己的chroot，这样可以确保不会冲突。于是，我们打开<code>server.properties</code>文件，修改配置项<code>zookeeper.connect</code>为<code>zookeeper.connect=localhost:2181/kafka</code>，然后保存文件。</p>
@@ -332,6 +337,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+          
+        </div>
       
 
       
@@ -444,7 +455,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
