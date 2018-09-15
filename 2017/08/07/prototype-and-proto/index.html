@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
 <meta property="og:description" content="原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。 首先我们来看看JavaScript中是如何创建一个对象的。 123const str = new String(&apos;Hello, World!">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T13:32:30.000Z">
+<meta property="og:updated_time" content="2018-09-11T16:20:19.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解原型链">
 <meta name="twitter:description" content="原型链是JavaScript继承机制的基础，同时也是JavaScript初学者的痛点，很多人在学习过程中也因为没有充分理解，最终导致经过一段时间就混淆了JavaScript原型机制中的一些概念，本文将分析JavaScript中的原型机制并以代码展示加以刨析。 首先我们来看看JavaScript中是如何创建一个对象的。 123const str = new String(&apos;Hello, World!">
@@ -322,6 +322,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func1</span>(<span class="params">str</span>)</span>&#123; <span class="comment">// 函数定义语句</span></span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> func2 = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123; <span class="comment">// 函数直接量表达式</span></span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> func3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"str"</span>, <span class="string">"return str"</span>); <span class="comment">// Function()构造函数</span></span><br></pre></td></tr></table></figure>
 <p>由第三种函数定义方式，我们很容易推测出一般函数的原型对象就是<code>Function.prototype</code>，事实上，不管是用户定义的函数，还是JavaScript内置的函数，甚至<code>Function</code>构造函数自身，其原型对象都是<code>Function.prototype</code>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Func.__proto__); <span class="comment">// ƒ () &#123; [native code] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(Func.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
 <p>参考：<br><a href="https://github.com/creeperyang/blog/issues/9" target="_blank" rel="noopener">《从<strong>proto</strong>和prototype来深入理解JS对象和原型链》</a><br><a href="https://zhuanlan.zhihu.com/p/22989691?utm_source=com.google.android.apps.messaging&amp;utm_medium=social" target="_blank" rel="noopener">《JavaScript 世界万物诞生记》</a></p>
 
       
@@ -446,7 +447,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

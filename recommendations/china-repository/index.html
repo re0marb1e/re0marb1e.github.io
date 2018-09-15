@@ -82,7 +82,7 @@
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
 <meta property="og:description" content="China Repository各类包管理工具的远程仓库在国内基本都处于半残废状态，为了实现国内的快速下载，换源成为包管理工具使用的第一步，下面整理了各类包管理工具的可用国内源以及换源操作。 Maven国内源http://maven.aliyun.com/nexus/content/groups/public 换源操作 复制maven系统配置文件setting.xml到用户目录~/home/.m2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-08T14:20:50.840Z">
+<meta property="og:updated_time" content="2018-09-08T14:25:09.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="国内源">
 <meta name="twitter:description" content="China Repository各类包管理工具的远程仓库在国内基本都处于半残废状态，为了实现国内的快速下载，换源成为包管理工具使用的第一步，下面整理了各类包管理工具的可用国内源以及换源操作。 Maven国内源http://maven.aliyun.com/nexus/content/groups/public 换源操作 复制maven系统配置文件setting.xml到用户目录~/home/.m2">
@@ -248,7 +248,7 @@
 <h4 id="换源操作"><a href="#换源操作" class="headerlink" title="换源操作"></a>换源操作</h4><ol>
 <li>复制maven系统配置文件<code>setting.xml</code>到用户目录<code>~/home/.m2/setting.xml</code></li>
 <li><p>在其中加入</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><h4 id="国内源-1"><a href="#国内源-1" class="headerlink" title="国内源"></a>国内源</h4><p><a href="http://maven.aliyun.com/nexus/content/groups/public" target="_blank" rel="noopener">http://maven.aliyun.com/nexus/content/groups/public</a></p>
@@ -341,7 +341,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
