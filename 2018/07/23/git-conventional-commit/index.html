@@ -75,18 +75,18 @@
 
 
 
-<meta name="description" content="使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。 为了防止这种情况，规范化Commit Mes">
+<meta name="description" content="更新于2018-10-09 13:59:14 使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="规范的Git代码提交说明">
 <meta property="og:url" content="http://blog.re0marb1e.cn/2018/07/23/git-conventional-commit/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:description" content="使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。 为了防止这种情况，规范化Commit Mes">
+<meta property="og:description" content="更新于2018-10-09 13:59:14 使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-22T16:54:28.001Z">
+<meta property="og:updated_time" content="2018-10-09T06:29:52.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="规范的Git代码提交说明">
-<meta name="twitter:description" content="使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。 为了防止这种情况，规范化Commit Mes">
+<meta name="twitter:description" content="更新于2018-10-09 13:59:14 使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。">
 
 
 
@@ -193,6 +193,16 @@
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -306,7 +316,8 @@
       
 
       
-        <p>使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。</p>
+        <p><span style="color:#999">更新于2018-10-09 13:59:14</span></p>
+<p>使用Git做代码管理的时候，每次提交都要写Commit Message，否则就不能进行提交。一般来说每次提交的Commit Message都应该说明本次提交的目的，但是事实情况并非如想象的那样。因为没有对提交说明进行规范，每个人的提交说明都可能很随意，可能会出现奇葩不着边际的说明，可能会出现毫无意义的说明，这就违背了Commit Message的初衷。</p>
 <p>为了防止这种情况，规范化Commit Message显得很有必要。此外，规范化的Commit Message使得提交历史的提交说明有着特定的格式，在回溯历史的时候能够方便很多，同时它还可以帮助开发者快速的生成Change Log。</p>
 <p>目前，开源社区已经有了多种Commit Message的写法规范，本文将介绍其中使用最广的<a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines" target="_blank" rel="noopener">AngularJS’s commit message convention</a>，其也被叫做<a href="https://conventionalcommits.org/" target="_blank" rel="noopener">Conventional Commits</a>。</p>
 <a id="more"></a>
@@ -321,10 +332,13 @@
 -   `git cz`用于替代`git commit`帮你撰写符合规范的Commit Message并提交
 </code></pre><p>安装完<code>commitizen</code>后在项目运行<code>commitizen init cz-conventional-changelog --save</code>以安装该规范适配器到项目中，然后使用<code>git cz</code>代替<code>git commit</code>命令用于代码提交，这样一个符合要求的Commit Message撰写工具就搭建完成了。</p>
 <h2 id="Commit-Message校验"><a href="#Commit-Message校验" class="headerlink" title="Commit Message校验"></a>Commit Message校验</h2><p>虽然有了撰写工具，但并不能保证项目的每个人都使用该工具或者提交符合格式的Commit Message；只有在每次Commit时校验Commit Message的格式才能保证每次的提交信息都符合格式。</p>
-<p>我们使用<code>commitlint</code>和<code>husky</code>来帮助我们完成校验：<br>首先安装并配置<code>commitlint</code>, 运行以下命令：</p>
+<p>我们使用<a href="http://marionebl.github.io/commitlint/#/" target="_blank" rel="noopener"><code>Commitlint</code></a>和<a href="https://github.com/typicode/husky" target="_blank" rel="noopener"><code>Husky</code></a>来帮助我们完成校验：<br>首先安装并配置<code>commitlint</code>, 运行以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @commitlint/&#123;config-conventional,cli&#125;</span><br><span class="line">echo &quot;module.exports = &#123;extends: [&apos;@commitlint/config-conventional&apos;]&#125;&quot; &gt; commitlint.config.js</span><br></pre></td></tr></table></figure>
 <p>然后安装并配置<code>husky</code>，运行<code>npm install --save-dev husky</code>，并把以下代码添加进<code>package.json</code>文件中。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"commitmsg"</span>: <span class="string">"commitlint -E GIT_PARAMS"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"husky"</span>: &#123;</span><br><span class="line">    <span class="attr">"hooks"</span>: &#123;</span><br><span class="line">      <span class="attr">"commit-msg"</span>: <span class="string">"commitlint -E HUSKY_GIT_PARAMS"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  如果读者使用的是1.0.0以前本本的<code>husky</code>，则在package.json添加以下代码：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"commitmsg"</span>: <span class="string">"commitlint -E GIT_PARAMS"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 <p>至此Commit Message的校验配置完毕，可以运行以下代码测试</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git commit -m "foo: this will fail"</span><br><span class="line">husky &gt; npm run -s commitmsg (node v10.6.0)</span><br><span class="line"></span><br><span class="line">⧗   input:</span><br><span class="line">fail commit</span><br><span class="line"></span><br><span class="line">✖   message may not be empty [subject-empty]</span><br><span class="line">✖   type may not be empty [type-empty]</span><br><span class="line">✖   found 2 problems, 0 warnings</span><br><span class="line"></span><br><span class="line">husky &gt; commit-msg hook failed (add --no-verify to bypass)</span><br><span class="line"></span><br><span class="line">git commit -m 'chore: lint on commitmsg'</span><br><span class="line">husky &gt; npm run -s commitmsg (node v10.6.0)</span><br><span class="line"></span><br><span class="line">⧗   input: chore: lint on commitmsg</span><br><span class="line">✔   found 0 problems, 0 warnings</span><br></pre></td></tr></table></figure>
 <h2 id="生成CHANGELOG"><a href="#生成CHANGELOG" class="headerlink" title="生成CHANGELOG"></a>生成CHANGELOG</h2><p>如果你所有的提交信息都符合规范，那么你就可以根据这些提交信息来自动生成Changelog。</p>
@@ -456,7 +470,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +483,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

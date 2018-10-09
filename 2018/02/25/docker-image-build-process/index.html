@@ -75,18 +75,18 @@
 
 
 
-<meta name="description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
+<meta name="description" content="构建Docker镜像一共有两种方法： 第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。 第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker镜像构建流程">
 <meta property="og:url" content="http://blog.re0marb1e.cn/2018/02/25/docker-image-build-process/index.html">
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
-<meta property="og:description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
+<meta property="og:description" content="构建Docker镜像一共有两种方法： 第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。 第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-11T16:42:02.416Z">
+<meta property="og:updated_time" content="2018-10-02T06:52:35.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker镜像构建流程">
-<meta name="twitter:description" content="构建Docker镜像一共有两种方法：第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就是每">
+<meta name="twitter:description" content="构建Docker镜像一共有两种方法： 第一种使用docker commit命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。 第二种是编写一个Dockerfile文件，然后使用docker build命令来构建镜像，其中Dockerfile实际上就">
 
 
 
@@ -193,6 +193,16 @@
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -306,7 +316,9 @@
       
 
       
-        <p>构建Docker镜像一共有两种方法：第一种使用<code>docker commit</code>命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。第二种是编写一个Dockerfile文件，然后使用<code>docker build</code>命令来构建镜像，其中Dockerfile实际上就是每一步对镜像所做变化的指令集，弥补了第一种方式的缺点，所以这种方式更适合用在生产环境中。</p>
+        <p>构建Docker镜像一共有两种方法：</p>
+<p>第一种使用<code>docker commit</code>命令来构建镜像，这种方式和Git的commit有点像，很容易理解，但是这种构建方式相当于制作者暗箱操作，很难记录每一次对镜像的变化，日后很难重制相同的镜像，达不到复用的效果，所以一般不推荐这种构建方式。</p>
+<p>第二种是编写一个Dockerfile文件，然后使用<code>docker build</code>命令来构建镜像，其中Dockerfile实际上就是每一步对镜像所做变化的指令集，弥补了第一种方式的缺点，所以这种方式更适合用在生产环境中。</p>
 <a id="more"></a>
 <p>那么，Docker是如何根据Dockerfile来构建镜像的呢？</p>
 <p>在讲述这个之前，我们先来理解一个概念：Docker构建上下文（docker build context）。首先Dockerfile编写完成后，肯定会有一个目录存放Dockerfile，而这个目录就是Docker的构建上下文，所有在构建过程中需要的文件必须存放在这个目录下。Docker会在构建镜像时将这个（构建上下文对应的）目录下的所有文件与目录都上传到Docker守护进程中，这样Docker守护进程就能在需要时直接访问这些文件。</p>
@@ -451,7 +463,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +476,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
