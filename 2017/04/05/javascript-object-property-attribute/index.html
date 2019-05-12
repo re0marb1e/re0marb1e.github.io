@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="re0marb1e&#39;s Bamboo Grove">
 <meta property="og:description" content="JavaScript中的对象实际上就是一组属性的集合，例如下例中的blog对象。 12345678910let blog = &amp;#123;	name: &quot;re0marb1e&apos;s blog&quot;,	author: &quot;re0marb1e&quot;,	post() &amp;#123;		console.log(&apos;re0marb1e is writing post!&apos;);	&amp;#125;&amp;#125;;console.log(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-15T13:24:24.446Z">
+<meta property="og:updated_time" content="2019-05-12T13:59:56.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript对象属性特性">
 <meta name="twitter:description" content="JavaScript中的对象实际上就是一组属性的集合，例如下例中的blog对象。 12345678910let blog = &amp;#123;	name: &quot;re0marb1e&apos;s blog&quot;,	author: &quot;re0marb1e&quot;,	post() &amp;#123;		console.log(&apos;re0marb1e is writing post!&apos;);	&amp;#125;&amp;#125;;console.log(">
@@ -134,7 +134,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -144,7 +144,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -244,20 +244,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.re0marb1e.cn/2017/04/05/javascript-object-property-attribute/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="re0marb1e">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="re0marb1e's Bamboo Grove">
     </span>
 
@@ -368,12 +368,12 @@
 </tbody>
 </table>
 <h2 id="数据属性与访问器属性"><a href="#数据属性与访问器属性" class="headerlink" title="数据属性与访问器属性"></a>数据属性与访问器属性</h2><p>根据拥有的属性特性的不同，对象属性又分为数据属性与访问器属性。其中数据属性拥有[[Configurable]], [[Enumerable]], [[Writable]]和[[Value]]四个特性；访问器属性拥有[[Configurable]], [[Enumerable]], [[Get]]和[[Set]]四个特性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> blog = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperties(blog, &#123;</span><br><span class="line">	_name: &#123;</span><br><span class="line">		value: <span class="string">"re0marb1e's blog"</span>,</span><br><span class="line">		writable: <span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	name: &#123;</span><br><span class="line">		get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">		&#125;,</span><br><span class="line">		set: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(name.endsWith(<span class="string">"'s blog"</span>))&#123;</span><br><span class="line">				<span class="keyword">this</span>._name = name;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">this</span>._name = name + <span class="string">"'s blog"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(blog.name);</span><br><span class="line">blog.name = <span class="string">"yjwmml"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(blog.name);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> blog = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperties(blog, &#123;</span><br><span class="line">	_name: &#123;</span><br><span class="line">		value: <span class="string">"re0marb1e's blog"</span>,</span><br><span class="line">		writable: <span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	name: &#123;</span><br><span class="line">		<span class="keyword">get</span>: function ()&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="keyword">set</span>: function (name)&#123;</span><br><span class="line">			<span class="keyword">if</span>(name.endsWith(<span class="string">"'s blog"</span>))&#123;</span><br><span class="line">				<span class="keyword">this</span>._name = name;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">this</span>._name = name + <span class="string">"'s blog"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(blog.name);</span><br><span class="line">blog.name = <span class="string">"yjwmml"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(blog.name);</span><br></pre></td></tr></table></figure>
 <p>数据属性不能拥有访问器属性的[[Get]]和[[Set]]两个特性，且访问器属性不能拥有数据属性的[[Writable]]和[[Value]]两个特性。</p>
 <h2 id="对象字面量创建对象"><a href="#对象字面量创建对象" class="headerlink" title="对象字面量创建对象"></a>对象字面量创建对象</h2><p>读者可能会对数据特性的默认值感到疑惑，比如第一个代码实例中，按照之前所述，那么author的[[Writable]]默认值应该为false，但是事实上author属性却是可以修改的。</p>
 <p>实际上，当使用对象字面量创建属性时，JavaScript默认会将[[Configurable]], [[Enumerable]], [[Writable]]设置为true。</p>
 <p>此外，通过对象字面量创建的属性都是数据属性，但是也可以通过指定getter和setter函数来定义访问器属性，如下。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> blog = &#123;</span><br><span class="line">	_name: <span class="string">"re0marb1e's blog"</span>,</span><br><span class="line">	get name()&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">	&#125;,</span><br><span class="line">	set name(name)&#123;</span><br><span class="line">		<span class="keyword">if</span>(name.endsWith(<span class="string">"'s blog"</span>))&#123;</span><br><span class="line">			<span class="keyword">this</span>._name = name;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">this</span>._name = name + <span class="string">"'s blog"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(blog, <span class="string">'_name'</span>)); <span class="comment">// &#123;value: "re0marb1e's blog", writable: true, enumerable: true, configurable: true&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(blog, <span class="string">'name'</span>)); <span class="comment">// &#123;get: ƒ name(), set: ƒ name(name), enumerable: true, configurable: true&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> blog = &#123;</span><br><span class="line">	_name: <span class="string">"re0marb1e's blog"</span>,</span><br><span class="line">	<span class="keyword">get</span> name()&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="keyword">set</span> name(name)&#123;</span><br><span class="line">		<span class="keyword">if</span>(name.endsWith(<span class="string">"'s blog"</span>))&#123;</span><br><span class="line">			<span class="keyword">this</span>._name = name;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">this</span>._name = name + <span class="string">"'s blog"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(blog, <span class="string">'_name'</span>)); <span class="comment">// &#123;value: "re0marb1e's blog", writable: true, enumerable: true, configurable: true&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(blog, <span class="string">'name'</span>)); <span class="comment">// &#123;get: ƒ name(), set: ƒ name(name), enumerable: true, configurable: true&#125;</span></span><br></pre></td></tr></table></figure>
 <p>上例中，我们通过对象字面量创建了一个对象，并定义了数据属性_name与访问器属性name。</p>
 <hr>
 <p>参考：<br><a href="http://www.ecma-international.org/ecma-262/5.1/" target="_blank" rel="noopener">《ECMAScript® Language Specification》</a><br><a href="http://www.gotojavascript.com/2012/04/object-properties-and-methods.html" target="_blank" rel="noopener">《Object: Data Property and Accessor Property》</a></p>
@@ -483,7 +483,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="re0marb1e">
             
